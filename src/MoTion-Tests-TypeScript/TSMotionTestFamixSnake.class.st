@@ -25,6 +25,33 @@ TSMotionTestFamixSnake >> testClassHasAtLeast4Methods [
 ]
 
 { #category : 'tests' }
+TSMotionTestFamixSnake >> testFoodInvocatedByindexOrNot [
+| model cls pattern results |
+ model := MooseModel root third.
+ cls:= model allModelClasses third.
+
+pattern := FamixTypeScriptClass % {
+    #'receivingInvocations>_*>name' <=> 'index.ts'
+}.
+
+results := pattern match: cls.
+results isMatch
+]
+
+{ #category : 'tests' }
+TSMotionTestFamixSnake >> testMethodMoveIsUnderSnakeClass [
+| model cls pattern results |
+model := MooseModel root third.
+cls := model allModelClasses second.
+
+pattern := FamixTypeScriptClass % {
+    #'methods>name' <=> 'move'
+}.
+results := pattern match: cls.
+results isMatch
+]
+
+{ #category : 'tests' }
 TSMotionTestFamixSnake >> testSnakeClassHasAtLeast3Attributes [
    | cls pattern results |
     cls := model allModelClasses second.
@@ -46,4 +73,16 @@ TSMotionTestFamixSnake >> testSnakeInheritsFromDrawable [
 
     results := pattern collectBindings: {#inheritance} for: cls.
     self assert: results isNotEmpty.
+]
+
+{ #category : 'as yet unclassified' }
+TSMotionTestFamixSnake >> testfoodSizeInFoodConstructor [
+|model cls pattern results|
+ model := MooseModel root third.
+ cls := model allModelClasses third.
+ pattern:= FamixTypeScriptClass % {  
+ #'methods>parameters*>name' <=> 'foodSize'
+}.
+ results:= pattern match: cls.
+ results isMatch
 ]
